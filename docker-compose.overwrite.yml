@@ -1,0 +1,14 @@
+version: "2"
+
+services:
+
+  webserver:
+    volumes:
+      # mount application dir
+      - "./:/var/www/html:cached"
+      # var directory shold stay in container
+      - "/var/www/html/var"
+    environment:
+      - APP_ENV=dev
+      - XDEBUG_CONFIG="idekey=${XDEBUG_IDEKEY} remote_enable=${XDEBUG_REMOTE_ENABLE} remote_host=${XDEBUG_REMOTE_HOST} remote_port=${XDEBUG_REMOTE_PORT}"
+      - PHP_IDE_CONFIG=serverName=${PHP_IDE_SERVER_NAME}
