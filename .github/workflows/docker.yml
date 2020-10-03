@@ -1,0 +1,23 @@
+name: docker
+
+on:
+  push:
+    branches: 
+    - master
+    - feature/*
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: build docker image
+      run: cd backend && docker build  --force-rm --no-cache --pull  --tag piradio-backend:test .
+
+    - name: test image
+      run: docker run --rm piradio-backend:test test
