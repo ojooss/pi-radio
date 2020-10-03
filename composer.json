@@ -98,7 +98,7 @@
             "php bin/console doctrine:migrations:migrate --allow-no-migration --quiet"
         ],
         "fixtures": [
-            "php bin/console doctrine:fixtures:load --quiet",
+            "php bin/console doctrine:fixtures:load --quiet"
         ],
         "test": [
             "php bin/phpunit"
