@@ -32,6 +32,8 @@ then
   # apache is necessary for ImageUploadTest
   service apache2 start
   echo "*** Running tests ***"
+  composer migrate
+  composer fixtures
   composer test
   # make sure to exit with test result
   exit $?
