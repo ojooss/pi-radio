@@ -1,5 +1,7 @@
 ###> IDE (Phpstorm) ###
-/.idea
+/.idea/dataSources
+/.idea/dataSources.local.xml
+/.idea/workspace.xml
 ###< IDE (Phpstorm) ###
 
 ###> development ###
@@ -21,3 +23,4 @@ composer.done
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+database.db
