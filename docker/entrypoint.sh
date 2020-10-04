@@ -2,14 +2,15 @@
 
 set -e
 
-echo "#########################################"
+echo ""
+echo "########## INITIALIZING APPLICATION ##########"
 PROJECT_PATH=/var/www/html/
 
 # install dependencies
 if [ ! -f ${PROJECT_PATH}composer.done -o ${PROJECT_PATH}composer.lock -nt ${PROJECT_PATH}composer.done ]; then
 ##composer install --no-dev
+  echo "run composer install"
   composer install
-  composer migrate
   touch ${PROJECT_PATH}composer.done
 else
   echo "composer is up to date"
@@ -24,7 +25,13 @@ else
     echo "MPD is running"
 fi
 
-echo "#########################################"
+# prepare database
+echo "run composer migrate"
+composer migrate
+
+echo ""
+echo "########### INITIALIZING FINISHED ###########"
+echo ""
 
 
 if [ "$1" = "test" ]
@@ -32,7 +39,6 @@ then
   # apache is necessary for ImageUploadTest
   service apache2 start
   echo "*** Running tests ***"
-  composer migrate
   composer fixtures
   composer test
   # make sure to exit with test result

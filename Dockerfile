@@ -34,9 +34,9 @@ RUN apt-get update && \
 COPY docker/mpd.conf /etc/mpd.conf
 
 
-# add application
+# add and init application
 COPY . /var/www/html
-
+RUN /var/www/html/docker/entrypoint.sh
 
 # Start image
 COPY docker/entrypoint.sh /usr/local/bin/piradio-entrypoint.sh
