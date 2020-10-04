@@ -21,3 +21,7 @@ composer.done
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> doctrine/doctrine-bundle ###
+database.db
+###< doctrine/doctrine-bundle ###
