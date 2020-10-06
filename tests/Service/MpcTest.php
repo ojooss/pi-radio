@@ -10,7 +10,6 @@ use App\Service\System;
 use Doctrine\Persistence\ObjectManager;
 use Mockery;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Throwable;
 
 class MpcTest extends KernelTestCase

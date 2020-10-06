@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Tests\Service;
-
 
 use App\Exception\SystemCallException;
 use App\Service\System;

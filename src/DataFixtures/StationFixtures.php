@@ -8,6 +8,8 @@ use App\Entity\Station;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class StationFixtures  extends Fixture
 {
@@ -30,7 +32,10 @@ class StationFixtures  extends Fixture
         $station = new Station();
         $station
             ->setName('My-Test-Station-03')
-            ->setUrl('https://stream.radio.com?st=testStationWithLogo');
+            ->setUrl('https://stream.radio.com?st=testStationWithLogo')
+            ->setImageFile(
+                new File( __DIR__ . '/../../tests/Data/TestLogo.png', true )
+            );
         $manager->persist($station);
 
         $faker = Factory::create('de_DE');
