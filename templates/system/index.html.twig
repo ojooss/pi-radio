@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}System Status{% endblock %}
+
+{% block body %}
+    <h1>System-Status</h1>
+
+    <div class="row row-cols-md-1 mb-3">
+        <div class="card">
+            <div class="card-header">
+                Aktuelle Zeit
+            </div>
+            <div class="card-body">
+                {{ current_time | raw }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-md-1 mb-3">
+        <div class="card">
+            <div class="card-header">
+                M3U Playlist
+            </div>
+            <div class="card-body">
+                {{ playlist_file | raw }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-md-1 mb-3">
+        <div class="card">
+            <div class="card-header">
+                MPC Playlist
+            </div>
+            <div class="card-body">
+                {{ mpc_playlist | raw }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-md-1 mb-3">
+        <div class="card">
+            <div class="card-header">
+                MPD Status
+            </div>
+            <div class="card-body">
+                {{ mpd_status | raw }}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row row-cols-md-1 mb-3">
+        <div class="card">
+            <div class="card-header">
+                MPC Status
+            </div>
+            <div class="card-body">
+                {{ mpc_status | raw }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

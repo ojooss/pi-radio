@@ -103,7 +103,7 @@
             "php bin/console doctrine:fixtures:load --quiet"
         ],
         "test": [
-            "php bin/phpunit"
+            "APP_ENV=test php bin/phpunit"
         ]
     },
     "conflict": {

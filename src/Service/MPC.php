@@ -87,12 +87,7 @@ class MPC
     public function getCurrent(): string
     {
         # mpc current
-        try {
-            $result = $this->system->call('mpc current');
-        } catch (SystemCallException $e) {
-            $this->system->call('service mpd start');
-            $result = $this->system->call('mpc current');
-        }
+        $result = $this->system->call('mpc current');
         if (count($result)) {
             return $result[0];
         } else {
