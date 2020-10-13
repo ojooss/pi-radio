@@ -8,6 +8,7 @@ use App\Service\FileService;
 use App\Service\MPC;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -31,6 +32,10 @@ class StationController extends AbstractController
      * @var FileService
      */
     private FileService $fileService;
+    /**
+     * @var ParameterBagInterface
+     */
+    private ParameterBagInterface $parameterBag;
 
     /**
      * StationController constructor.
@@ -38,12 +43,14 @@ class StationController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @param MPC $mpc
      * @param FileService $fileService
+     * @param ParameterBagInterface $parameterBag
      */
-    public function __construct(EntityManagerInterface $entityManager, MPC $mpc, FileService $fileService)
+    public function __construct(EntityManagerInterface $entityManager, MPC $mpc, FileService $fileService, ParameterBagInterface $parameterBag)
     {
         $this->entityManager = $entityManager;
         $this->mpc = $mpc;
         $this->fileService = $fileService;
+        $this->parameterBag = $parameterBag;
     }
 
     /**
@@ -57,8 +64,8 @@ class StationController extends AbstractController
         return $this->render(
             'station/index.html.twig',
             [
-                'controller_name' => 'StationController',
                 'stations' => $repository->findAll(),
+                'logoPath' => $this->parameterBag->get('logo_url_path'),
             ]
         );
     }

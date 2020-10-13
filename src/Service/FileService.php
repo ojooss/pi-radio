@@ -27,7 +27,7 @@ class FileService
     public function __construct(ParameterBagInterface $parameterBag)
     {
         $this->logoDir  = $parameterBag->get('logo_location');
-        $this->logoUrlPath = str_replace($parameterBag->get('kernel.project_dir'), $this->logoDir, '');
+        $this->logoUrlPath = $parameterBag->get('logo_url_path');
     }
 
     /**

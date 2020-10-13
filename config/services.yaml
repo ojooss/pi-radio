@@ -6,6 +6,7 @@
 parameters:
     playlist_location: "%kernel.project_dir%/var/mpc-playlist.m3u"
     logo_location: "%kernel.project_dir%/public/logos"
+    logo_url_path: "/logos"
 
 services:
     # default configuration for services in *this* file
