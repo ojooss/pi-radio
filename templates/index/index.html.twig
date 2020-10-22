@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{% trans %}Playerstatus{% endtrans %}</h1>
+
+    {% if playerError %}
+    <div class="alert alert-danger" role="alert">
+        {{ playerError }}
+    </div>
+    {% endif %}
+
+    {%  if playerStatus %}
+    <div class="d-flex flex-wrap">
+        <div class="card m-1">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                {{  playerStatus }}
+                <a href="{{ path('station_stop') }}">stop</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}
