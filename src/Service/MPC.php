@@ -78,6 +78,7 @@ class MPC
         if (!empty($this->getCurrent())) {
             throw new MpcException('Can not stop player');
         }
+        $this->system->call('mpc clearerror');
     }
 
     /**

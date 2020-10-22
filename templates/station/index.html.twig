@@ -1,22 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}System Status{% endblock %}
-
 {% block body %}
 <h1>{% trans %}Senderliste{% endtrans %}</h1>
 
+{% if stationError is defined and stationError %}
+    <div class="alert alert-danger" role="alert">
+        {{ stationError }}
+    </div>
+{% endif %}
+
+<div class="d-flex flex-wrap">
 {% for station in stations %}
-<div class="row row-cols-md-1 mb-3">
-    <div class="card">
+    <div class="card station-card m-1">
         <div class="card-header">
             {{  station.name }}
         </div>
         <div class="card-body">
             {{  station.id }}  <a href="{{ path('station_play', { id: station.id } ) }}">{% trans %}Sender spielen{% endtrans %}</a>
-            <img src="{{ logoPath }}/{{ station.logoname }}" />
+            <img class="station-logo" src="{{ logoPath }}/{{ station.logoname }}" />
         </div>
     </div>
-</div>
 {% endfor %}
+</div>
 
 {% endblock %}

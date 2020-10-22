@@ -3,17 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Station;
+use App\Exception\MpcException;
+use App\Exception\SystemCallException;
 use App\Repository\StationRepository;
 use App\Service\FileService;
 use App\Service\MPC;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Throwable;
 
 
 class StationController extends AbstractController
@@ -54,7 +56,7 @@ class StationController extends AbstractController
     }
 
     /**
-     * @Route("/station", name="station")
+     * @Route("/stations", name="stations")
      */
     public function index()
     {
@@ -73,7 +75,7 @@ class StationController extends AbstractController
     /**
      * @Route("/station/{id}/play", name="station_play")
      * @param int $id
-     * @return RedirectResponse
+     * @return Response
      */
     public function play(int $id)
     {
@@ -84,10 +86,23 @@ class StationController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        $this->mpc->play($station);
+        try {
+            $this->mpc->play($station);
+        } catch (Throwable $e) {
+            return $this->render('station/index.html.twig', ['statioError' => $e->getMessage()]);
+        }
 
         return $this->redirectToRoute('index');
     }
 
+    /**
+     * @Route("/station/stop", name="station_stop")
+     */
+    public function playerStop()
+    {
+        $this->mpc->stop();
+
+        return $this->redirectToRoute('stations');
+    }
 
 }
