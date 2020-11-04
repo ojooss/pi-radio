@@ -8,13 +8,19 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # linux packages
 RUN apt-get update && \
     apt-get install -y git zip && \
+    # sudo for app
+    apt-get install -y sudo && \
+    # libicu for php-intl
+    apt-get install -y libicu-dev && \
     apt-get clean
 
 
 # PHP modules
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+RUN docker-php-ext-install pdo pdo_mysql mysqli \
+ # php-intl
+ && docker-php-ext-configure intl && docker-php-ext-install intl \
 # xdebug
-RUN pecl install xdebug && docker-php-ext-enable xdebug
+ && pecl install xdebug && docker-php-ext-enable xdebug
 
 
 # apache configuration
@@ -32,11 +38,13 @@ RUN apt-get update && \
     apt-get install -y mpd mpc alsa-utils && \
     apt-get clean
 COPY docker/mpd.conf /etc/mpd.conf
+COPY docker/sudoers.conf /etc/sudoers.d/piradio
 
 
 # add and init application
 COPY . /var/www/html
 RUN bash /var/www/html/docker/entrypoint.sh
+
 
 # Start image
 COPY docker/entrypoint.sh /usr/local/bin/piradio-entrypoint.sh
