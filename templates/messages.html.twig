@@ -1,0 +1,22 @@
+<div class="container">
+{% if app.request.get('e') %}
+    <div class="alert alert-danger" role="alert">
+        <pre>{{ app.request.get('e') }}</pre>
+    </div>
+{% endif %}
+{% if errorMessage is defined %}
+    <div class="alert alert-danger" role="alert">
+        <pre>{{ errorMessage }}</pre>
+    </div>
+{% endif %}
+{% if app.request.get('s') %}
+    <div class="alert alert-info" role="alert">
+        <pre>{{ app.request.get('s') }}</pre>
+    </div>
+{% endif %}
+{% if successMessage is defined %}
+    <div class="alert alert-info" role="alert">
+        <pre>{{ successMessage }}</pre>
+    </div>
+{% endif %}
+</div>

@@ -6,3 +6,14 @@
 .station-card {
     width: 190px;
 }
+
+.alert pre {
+    color: inherit;
+    margin: unset;
+    font-size: inherit;
+}
+
+div.alert {
+    max-width: 66%;
+    margin: 15px auto 15px auto;
+}
