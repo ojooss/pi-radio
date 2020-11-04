@@ -23,7 +23,7 @@ class System
         $ret = 0;
         exec($command, $output, $ret);
         if ($ret != 0) {
-            throw new SystemCallException('command "'.$command.'" failed');
+            throw new SystemCallException('command "'.$command.'" failed', $output);
         }
         return $output;
     }

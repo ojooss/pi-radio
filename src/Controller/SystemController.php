@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Exception\SystemCallException;
 use App\Service\System;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,12 +66,15 @@ class SystemController extends AbstractController
     public function resetMpd()
     {
         try {
-            $result = $this->system->call('service mpd start');
-            $message = implode('<br />', $result);
-        } catch (Exception $e) {
-            $message = $e->getMessage();
+            $result = $this->system->call('sudo /etc/init.d/mpd start');
+            $message = implode(PHP_EOL, $result);
+        } catch (SystemCallException $e) {
+            $message =
+                $e->getMessage() . PHP_EOL .
+                PHP_EOL .
+                implode(PHP_EOL, $e->getOutput());
         }
-        return $this->redirectToRoute('system_status', ['msg' => $message]);
+        return $this->redirectToRoute('system_status', ['e' => $message]);
     }
 
     /**
