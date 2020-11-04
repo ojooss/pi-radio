@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Exception\SystemCallException;
 use App\Service\MPC;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,10 +32,14 @@ class IndexController extends AbstractController
     public function index()
     {
 
-        if ($this->mpc->isPlaying()) {
-            $status = $this->mpc->getCurrent();
-        } else {
-            return $this->redirectToRoute('stations');
+        try {
+            if ($this->mpc->isPlaying()) {
+                $status = $this->mpc->getCurrent();
+            } else {
+                return $this->redirectToRoute('stations');
+            }
+        } catch (Exception $e) {
+            return $this->redirectToRoute('stations', ['e' => $e->getMessage()]);
         }
 
         return $this->render(
