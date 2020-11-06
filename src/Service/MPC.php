@@ -75,7 +75,7 @@ class MPC
     public function stop(): void
     {
         $this->system->call('mpc stop');
-        if (!empty($this->getCurrent())) {
+        if (!empty($this->getState())) {
             throw new MpcException('Can not stop player');
         }
         $this->system->call('mpc clearerror');
@@ -85,7 +85,7 @@ class MPC
      * @return string
      * @throws SystemCallException
      */
-    public function getCurrent(): string
+    public function getState(): string
     {
         # mpc current
         $result = $this->system->call('mpc current');
@@ -102,7 +102,7 @@ class MPC
      */
     public function isPlaying(): bool
     {
-        return !empty($this->getCurrent());
+        return !empty($this->getState());
     }
 
     /**

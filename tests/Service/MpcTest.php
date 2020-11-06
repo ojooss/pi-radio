@@ -193,7 +193,7 @@ class MpcTest extends KernelTestCase
             ->times(1)
             ->andReturn(['[playing]]']);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
-        $result = $mpc->getCurrent();
+        $result = $mpc->getState();
         $this->assertNotEmpty($result);
 
         Mockery::close();
@@ -203,7 +203,7 @@ class MpcTest extends KernelTestCase
             ->times(1)
             ->andReturn(['']);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
-        $result = $mpc->getCurrent();
+        $result = $mpc->getState();
         $this->assertEmpty($result);
     }
 

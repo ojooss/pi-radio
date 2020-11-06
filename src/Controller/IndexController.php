@@ -34,7 +34,7 @@ class IndexController extends AbstractController
 
         try {
             if ($this->mpc->isPlaying()) {
-                $status = $this->mpc->getCurrent();
+                $status = $this->mpc->getState();
             } else {
                 return $this->redirectToRoute('stations');
             }
