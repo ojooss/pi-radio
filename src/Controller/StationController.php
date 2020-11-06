@@ -57,18 +57,28 @@ class StationController extends AbstractController
 
     /**
      * @Route("/stations", name="stations")
+     *
+     * @return Response
+     * @throws SystemCallException
      */
     public function index()
     {
         /** @var StationRepository $repository */
         $repository = $this->entityManager->getRepository(Station::class);
 
+        $parameter = [
+            'stations' => $repository->findAll(),
+            'logoPath' => $this->parameterBag->get('logo_url_path'),
+        ];
+
+        $mpcError = $this->mpc->getError();
+        if ($mpcError) {
+            $parameter['errorMessage'] = $mpcError;
+        }
+
         return $this->render(
             'station/index.html.twig',
-            [
-                'stations' => $repository->findAll(),
-                'logoPath' => $this->parameterBag->get('logo_url_path'),
-            ]
+            $parameter
         );
     }
 
@@ -101,6 +111,23 @@ class StationController extends AbstractController
     public function playerStop()
     {
         $this->mpc->stop();
+
+        return $this->redirectToRoute('stations');
+    }
+
+    /**
+     * @Route("/station/{id}/delete", name="station_delete")
+     * @param $id
+     */
+    public function delete($id)
+    {
+        /** @var StationRepository $repository */
+        $repository = $this->entityManager->getRepository(Station::class);
+        $station = $repository->find($id);
+        if ($station) {
+            $this->entityManager->remove($station);
+            $this->entityManager->flush();
+        }
 
         return $this->redirectToRoute('stations');
     }

@@ -12,12 +12,13 @@
 <div class="d-flex flex-wrap">
 {% for station in stations %}
     <div class="card station-card m-1">
-        <div class="card-header">
-            {{  station.name }}
+        <div class="card-header text-nowrap">
+            {{  station.name }}&nbsp;&nbsp;<a style="font-size: 0.7em;" href="{{ path('station_delete', { id: station.id } ) }}"><i class="fas fa-trash"></i></a>
         </div>
         <div class="card-body">
-            {{  station.id }}  <a href="{{ path('station_play', { id: station.id } ) }}">{% trans %}Sender spielen{% endtrans %}</a>
-            <img class="station-logo" src="{{ logoPath }}/{{ station.logoname }}" />
+            <a href="{{ path('station_play', { id: station.id } ) }}">
+                <img class="station-logo" src="{{ logoPath }}/{{ station.logoname }}" />
+            </a>
         </div>
     </div>
 {% endfor %}
