@@ -5,8 +5,6 @@ namespace App\Service;
 use App\Entity\Station;
 use App\Exception\MpcException;
 use App\Exception\SystemCallException;
-use App\Kernel;
-use Exception;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Throwable;
 
@@ -25,7 +23,7 @@ class MPC
 
     /**
      * MPC constructor.
-     * @param Kernel $kernel
+     * @param KernelInterface $kernel
      * @param System $system
      */
     public function __construct(KernelInterface $kernel, System $system)
@@ -64,8 +62,6 @@ class MPC
         # play first item (we have only one)
         $result = $this->system->call('mpc play 1');
         $this->system->validateOutput($result, preg_quote('[playing]'), MpcException::class, 'Can not start player');
-
-        $station->isBeingPlayed = true;
     }
 
     /**
@@ -192,6 +188,14 @@ class MPC
         } else {
             return '';
         }
+    }
+
+    /**
+     * @return false|string
+     */
+    public function getPlaylistFileContent()
+    {
+        return file_get_contents($this->playlistFile);
     }
 
 }

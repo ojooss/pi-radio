@@ -9,14 +9,26 @@
     </div>
     {% endif %}
 
-    {%  if playerStatus %}
+    {%  if playerState %}
     <div class="d-flex flex-wrap">
-        <div class="card m-1">
-            <div class="card-header">
-            </div>
+        <div class="card m-auto">
             <div class="card-body">
-                {{  playerStatus }}
-                <a href="{{ path('station_stop') }}">stop</a>
+                <div class="text-center mb-2">
+                    <img class="player-logo rounded" src="{{ logoPath }}/{{ station.logoname }}" />
+                </div>
+                <div class="text-center mb-2">
+                {{  playerState }}
+                </div>
+                <div class="progress mb-2">
+                    <div class="progress-bar" role="progressbar" style="width: {{ playerVolume }}%;" aria-valuenow="{{ playerVolume }}" aria-valuemin="0" aria-valuemax="100">{{ playerVolume }}%</div>
+                </div>
+                <div class="text-center control-panel">
+                    <a href="{{ path('volume_mute') }}"><i class="fas fa-volume-mute"></i></a>
+                    <a href="{{ path('volume_down') }}"><i class="fas fa-volume-down"></i></a>
+                    <a href="{{ path('station_stop') }}"><i class="fas fa-stop-circle"></i></a>
+                    <a href="{{ path('volume_up') }}"><i class="fas fa-volume-up"></i></a>
+                    <a href="{{ path('volume_full') }}"><i class="fas fa-bullhorn"></i></a>
+                </div>
             </div>
         </div>
     </div>

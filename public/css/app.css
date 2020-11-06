@@ -2,6 +2,10 @@
     max-width: 150px;
     max-height: 150px;
 }
+.player-logo {
+    max-width: 300px;
+    max-height: 300px;
+}
 
 .station-card {
     width: 190px;
@@ -16,4 +20,11 @@
 div.alert {
     max-width: 66%;
     margin: 15px auto 15px auto;
+}
+
+.control-panel {
+    font-size: 25px;
+}
+.control-panel a {
+    margin: 5px;
 }

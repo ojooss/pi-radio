@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Station;
+use App\Service\MPC;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,9 +15,38 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class StationRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var MPC
+     */
+    private MPC $MPC;
+
+    /**
+     * StationRepository constructor.
+     * @param ManagerRegistry $registry
+     * @param MPC $MPC
+     */
+    public function __construct(ManagerRegistry $registry, MPC $MPC)
     {
         parent::__construct($registry, Station::class);
+        $this->MPC = $MPC;
+    }
+
+    /**
+     * @return null|Station
+     */
+    public function getCurrent() {
+        $content = $this->MPC->getPlaylistFileContent();
+        $entities = $this->createQueryBuilder('s')
+            ->andWhere('s.url = :url')
+            ->setParameter('url', $content)
+            ->getQuery()
+            ->getResult()
+            ;
+        if (count($entities) === 1) {
+            return current($entities);
+        } else {
+            return null;
+        }
     }
 
     // /**
