@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StationRepository")
@@ -25,11 +26,15 @@ class Station
 
     /**
      * @ORM\Column(type="string", length=128)
+     *
+     * @Assert\NotBlank
      */
     private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
      */
     private string $url;
 
@@ -46,7 +51,7 @@ class Station
     /**
      * @ORM\Column(type="datetime")
      *
-     * @var DateTimeInterface
+     * @Assert\DateTime
      */
     private DateTimeInterface $updatedAt;
 
