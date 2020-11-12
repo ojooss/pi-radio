@@ -12,8 +12,13 @@
 <div class="d-flex flex-wrap">
 {% for station in stations %}
     <div class="card station-card m-1">
-        <div class="card-header text-nowrap">
-            {{  station.name }}&nbsp;&nbsp;<a style="font-size: 0.7em;" href="{{ path('station_delete', { id: station.id } ) }}"><i class="fas fa-trash"></i></a>
+        <div class="card-header row mr-0 ml-0">
+            <div class="col-11 text-nowrap pl-0 pr-0">
+                {{  station.name }}
+            </div>
+            <div class="col-1 pl-0 pr-0">
+                <a style="font-size: 0.7em;" href="{{ path('station_delete', { id: station.id } ) }}"><i class="fas fa-trash"></i></a>
+            </div>
         </div>
         <div class="card-body">
             <a href="{{ path('station_play', { id: station.id } ) }}">
@@ -23,5 +28,7 @@
     </div>
 {% endfor %}
 </div>
+
+{% include 'station/form.html.twig' %}
 
 {% endblock %}
