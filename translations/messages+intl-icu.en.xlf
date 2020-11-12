@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="poNbwrl" resname="Sendername">
+        <source>Sendername</source>
+        <target>station name</target>
+      </trans-unit>
+      <trans-unit id="ofT3HHo" resname="Senderadresse">
+        <source>Senderadresse</source>
+        <target>station url</target>
+      </trans-unit>
+      <trans-unit id="Nkh905c" resname="Logodatei">
+        <source>Logodatei</source>
+        <target>logo file</target>
+      </trans-unit>
+      <trans-unit id="9rL.OfV" resname="Speichern">
+        <source>Speichern</source>
+        <target>save</target>
+      </trans-unit>
+      <trans-unit id="goz6lID" resname="Playerstatus">
+        <source>Playerstatus</source>
+        <target>player status</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>home</target>
+      </trans-unit>
+      <trans-unit id="nT0gTyo" resname="Stations">
+        <source>Stations</source>
+        <target>stations</target>
+      </trans-unit>
+      <trans-unit id="ZyXnu80" resname="System">
+        <source>System</source>
+        <target>system</target>
+      </trans-unit>
+      <trans-unit id=".Gw6ddF" resname="Sender hinzufügen">
+        <source>Sender hinzufügen</source>
+        <target>add station</target>
+      </trans-unit>
+      <trans-unit id="5xs1xY6" resname="Senderliste">
+        <source>Senderliste</source>
+        <target>stations</target>
+      </trans-unit>
+      <trans-unit id="SwHzm08" resname="System-Status">
+        <source>System-Status</source>
+        <target>system state</target>
+      </trans-unit>
+      <trans-unit id="w6y7gh6" resname="Aktuelle Zeit">
+        <source>Aktuelle Zeit</source>
+        <target>current time</target>
+      </trans-unit>
+      <trans-unit id="ihVwywK" resname="M3U Playlist">
+        <source>M3U Playlist</source>
+        <target>M3U playlist</target>
+      </trans-unit>
+      <trans-unit id="J1hfn5p" resname="MPD Status">
+        <source>MPD Status</source>
+        <target>MPD state</target>
+      </trans-unit>
+      <trans-unit id="RjU8wEt" resname="MPC Status">
+        <source>MPC Status</source>
+        <target>MPC state</target>
+      </trans-unit>
+      <trans-unit id="1Cy3E7H" resname="MPC Playlist">
+        <source>MPC Playlist</source>
+        <target>MPC playlist</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
