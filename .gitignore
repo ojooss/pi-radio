@@ -5,7 +5,8 @@
 ###< IDE (Phpstorm) ###
 
 ###> development ###
-composer.done
+/composer.done
+/public/css/fontawesome-free-5.15.1-web
 ###< development ###
 
 ###> symfony/framework-bundle ###
