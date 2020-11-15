@@ -10,8 +10,8 @@ PROJECT_PATH=/var/www/html/
 if [ ! -f ${PROJECT_PATH}composer.done -o ${PROJECT_PATH}composer.lock -nt ${PROJECT_PATH}composer.done ]; then
 ##composer install --no-dev
   echo "run composer install"
-  composer install
-  touch ${PROJECT_PATH}composer.done
+  sudo -u www-data composer install
+  sudo -u www-data touch ${PROJECT_PATH}composer.done
 else
   echo "composer is up to date"
 fi
@@ -27,7 +27,7 @@ fi
 
 # prepare database
 echo "run composer migrate"
-composer migrate
+sudo -u www-data composer migrate
 
 echo ""
 echo "########### INITIALIZING FINISHED ###########"
@@ -39,8 +39,8 @@ then
   # apache is necessary for ImageUploadTest
   service apache2 start
   echo "*** Running tests ***"
-  composer fixtures
-  composer test
+  sudo -u www-data composer fixtures
+  sudo -u www-data composer test
   # make sure to exit with test result
   exit $?
 else

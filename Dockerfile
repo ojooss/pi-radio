@@ -44,6 +44,7 @@ COPY docker/sudoers.conf /etc/sudoers.d/piradio
 # add and init application
 COPY . /var/www/html
 RUN bash /var/www/html/docker/entrypoint.sh
+RUN chown -R www-data:www-data /var/www/html
 
 
 # Start image
