@@ -132,7 +132,7 @@ class StationController extends AbstractController
         try {
             $this->mpc->play($station);
         } catch (Throwable $e) {
-            return $this->render('station/index.html.twig', ['statioError' => $e->getMessage()]);
+            return $this->redirectToRoute('index', ['e' => $e->getMessage()]);
         }
 
         return $this->redirectToRoute('index');

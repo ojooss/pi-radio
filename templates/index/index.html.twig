@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{% trans %}Playerstatus{% endtrans %}</h1>
 
     {% if playerError %}
     <div class="alert alert-danger" role="alert">
@@ -11,7 +10,7 @@
 
     {%  if playerState %}
     <div class="d-flex flex-wrap">
-        <div class="card m-auto">
+        <div class="card mt-4">
             <div class="card-body">
                 <div class="text-center mb-2">
                     <img class="player-logo rounded" src="{{ logoPath }}/{{ station.logoname }}" />

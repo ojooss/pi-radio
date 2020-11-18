@@ -1,3 +1,7 @@
+body {
+    font-size: 1.5em;
+}
+
 .station-logo {
     max-width: 150px;
     max-height: 150px;
@@ -23,8 +27,21 @@ div.alert {
 }
 
 .control-panel {
-    font-size: 25px;
+    font-size: 1.5em;
 }
 .control-panel a {
-    margin: 5px;
+    margin: 7px;
+}
+
+
+.progress {
+    height: 3em;
+}
+.progress-bar {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.btn-delete {
+    display: none;
 }

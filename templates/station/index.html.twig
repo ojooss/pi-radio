@@ -13,10 +13,10 @@
 {% for station in stations %}
     <div class="card station-card m-1">
         <div class="card-header row mr-0 ml-0">
-            <div class="col-11 text-nowrap pl-0 pr-0">
+            <div class="col-11 pl-0 pr-0">
                 {{  station.name }}
             </div>
-            <div class="col-1 pl-0 pr-0">
+            <div class="col-1 pl-0 pr-0 btn-delete">
                 <a style="font-size: 0.7em;" href="{{ path('station_delete', { id: station.id } ) }}"><i class="fas fa-trash"></i></a>
             </div>
         </div>
@@ -29,6 +29,19 @@
 {% endfor %}
 </div>
 
-{% include 'station/form.html.twig' %}
+<p>
+    <a id="btn-delete-toggle" href="#">
+        <i class="fas fa-trash"></i>
+    </a>
+    &nbsp;
+    <a data-toggle="collapse" href="#collapseStationForm" aria-expanded="false" aria-controls="collapseStationForm">
+        <i class="fas fa-plus-square"></i>
+    </a>
+</p>
+<div class="collapse" id="collapseStationForm">
+    <div class="card card-body">
+        {{ form(add_station_form) }}
+    </div>
+</div>
 
 {% endblock %}
