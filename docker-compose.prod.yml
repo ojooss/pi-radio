@@ -11,5 +11,7 @@ services:
       - APP_ENV=prod
     ports:
       - "${HTTP_PORT}:80"
-#    devices:
-#      - /dev/snd
+    volumes:
+      - "piradio.db:/var/www/html/database.db"
+    devices:
+      - /dev/snd
