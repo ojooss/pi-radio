@@ -35,8 +35,6 @@ class MpcTest extends KernelTestCase
     final function tearDown(): void
     {
         parent::tearDown();
-
-        Mockery::close();
     }
 
     /**
@@ -79,13 +77,13 @@ class MpcTest extends KernelTestCase
             ->andReturn(true, true, true);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
         $mpc->play($station);
+        Mockery::close();
         # playlist should contain station url
         $this->assertStringEqualsFile(__DIR__ . '/../../var/mpc-playlist.m3u', $station->getUrl());
 
         /*
          * Error case 1: mpc load mpc-playlist failed
          */
-        Mockery::close();
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock->shouldReceive('call')
             ->times(2);
@@ -100,11 +98,11 @@ class MpcTest extends KernelTestCase
         } catch (MpcException $e) {
             $this->assertStringContainsString('MockedException', $e->getMessage());
         }
+        Mockery::close();
 
         /*
          * Error case 2: Can not reload mpc-playlist
          */
-        Mockery::close();
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock->shouldReceive('call')
             ->times(3);
@@ -123,11 +121,11 @@ class MpcTest extends KernelTestCase
         } catch (MpcException $e) {
             $this->assertStringContainsString('MockedException', $e->getMessage());
         }
+        Mockery::close();
 
         /*
          * Error case 3: Can not start player
          */
-        Mockery::close();
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock->shouldReceive('call');
         $systemServiceMock
@@ -145,6 +143,7 @@ class MpcTest extends KernelTestCase
         } catch (MpcException $e) {
             $this->assertStringContainsString('MockedException', $e->getMessage());
         }
+        Mockery::close();
 
     }
 
@@ -158,13 +157,13 @@ class MpcTest extends KernelTestCase
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
-            ->times(2)
-            ->andReturn([], []);
+            ->times(3)
+            ->andReturn([], [], []);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
         $mpc->stop();
+        Mockery::close();
 
         /// fail case
-        Mockery::close();
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -180,6 +179,7 @@ class MpcTest extends KernelTestCase
         } catch (MpcException $e) {
             $this->assertStringContainsString('Can not stop player', $e->getMessage());
         }
+        Mockery::close();
     }
 
     /**
@@ -194,9 +194,9 @@ class MpcTest extends KernelTestCase
             ->andReturn(['[playing]]']);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
         $result = $mpc->getState();
+        Mockery::close();
         $this->assertNotEmpty($result);
 
-        Mockery::close();
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -204,6 +204,7 @@ class MpcTest extends KernelTestCase
             ->andReturn(['']);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
         $result = $mpc->getState();
+        Mockery::close();
         $this->assertEmpty($result);
     }
 
@@ -219,8 +220,8 @@ class MpcTest extends KernelTestCase
             ->andReturn(['[playing]']);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
         $this->assertTrue($mpc->isPlaying());
-
         Mockery::close();
+
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -228,6 +229,7 @@ class MpcTest extends KernelTestCase
             ->andReturn(['']);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
         $this->assertFalse($mpc->isPlaying());
+        Mockery::close();
     }
 
     /**
@@ -243,8 +245,8 @@ class MpcTest extends KernelTestCase
             ->andReturn(['volume: 42%']);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
         $this->assertEquals(42, $mpc->getVolume());
-
         Mockery::close();
+
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -257,6 +259,7 @@ class MpcTest extends KernelTestCase
         } catch (MpcException $e) {
             $this->assertStringContainsString('can not extract volume', $e->getMessage());
         }
+        Mockery::close();
     }
 
     /**
@@ -312,6 +315,7 @@ class MpcTest extends KernelTestCase
         } catch (SystemCallException $e) {
             $this->fail($e->getMessage());
         }
+        Mockery::close();
 
     }
 
@@ -329,8 +333,8 @@ class MpcTest extends KernelTestCase
             ->andReturn(['mpd is running.']);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
         $this->assertTrue( $mpc->isMpdRunning() );
-
         Mockery::close();
+
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -338,6 +342,7 @@ class MpcTest extends KernelTestCase
             ->andReturn(['mpd is NOT running.']);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
         $this->assertFalse( $mpc->isMpdRunning() );
+        Mockery::close();
     }
 
 
@@ -353,6 +358,7 @@ class MpcTest extends KernelTestCase
             ->andReturn(['ERROR: Failed to decode url']);
         $mpc = new MPC(parent::$kernel, $systemServiceMock);
         $result = $mpc->getError();
+        Mockery::close();
         $this->assertEquals('ERROR: Failed to decode url', $result);
     }
 

@@ -13,7 +13,8 @@ class IndexControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request(Request::METHOD_GET, '/');
-        self::assertResponseStatusCodeSame(200);
+        // player does not play - redirect to stations
+        self::assertResponseStatusCodeSame(302);
     }
 
 }
