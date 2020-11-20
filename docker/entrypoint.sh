@@ -26,6 +26,7 @@ else
 fi
 
 # prepare database
+sudo -u www-data mkdir -p ${PROJECT_PATH}var/database
 echo "run composer migrate"
 sudo -u www-data composer migrate
 

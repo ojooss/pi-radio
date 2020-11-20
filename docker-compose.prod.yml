@@ -12,6 +12,9 @@ services:
     ports:
       - "${HTTP_PORT}:80"
     volumes:
-      - "piradio.db:/var/www/html/database.db"
+      - "database:/var/www/html/var/database/"
     devices:
       - /dev/snd
+
+volumes:
+  database:
