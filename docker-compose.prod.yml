@@ -13,8 +13,10 @@ services:
       - "${HTTP_PORT}:80"
     volumes:
       - "database:/var/www/html/var/database/"
+      - "logos:/var/www/html/public/logos/"
     devices:
       - /dev/snd
 
 volumes:
   database:
+  logos:
