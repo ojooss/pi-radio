@@ -141,4 +141,20 @@ class IndexController extends AbstractController
         return $this->index();
     }
 
+
+    /**
+     * @Route("/volume/{value<\d+>}", name="volume_set")
+     *
+     * @return RedirectResponse|Response
+     * @throws MpcException
+     * @throws SystemCallException
+     */
+    public function volumeSet($value)
+    {
+        if ($value >= 0 && $value <= 100) {
+            $this->mpc->setVolume((int)$value);
+        }
+
+        return $this->index();
+    }
 }
