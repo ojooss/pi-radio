@@ -34,7 +34,8 @@ class StationRepository extends ServiceEntityRepository
     /**
      * @return null|Station
      */
-    public function getCurrent() {
+    public function getCurrent(): ?Station
+    {
         $content = $this->MPC->getPlaylistFileContent();
         $entities = $this->createQueryBuilder('s')
             ->andWhere('s.url = :url')

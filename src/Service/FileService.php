@@ -1,4 +1,6 @@
 <?php
+/** @noinspection PhpUnused */
+/** @noinspection MissingService */
 
 namespace App\Service;
 
@@ -11,14 +13,14 @@ class FileService
 {
 
     /**
-     * @var mixed
+     * @var string
      */
-    private $logoDir;
+    private string $logoDir;
 
     /**
-     * @var mixed
+     * @var string
      */
-    private $logoUrlPath;
+    private string $logoUrlPath;
 
     /**
      * FileService constructor.
@@ -31,9 +33,9 @@ class FileService
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLogoDir()
+    public function getLogoDir(): string
     {
         return $this->logoDir;
     }
@@ -42,16 +44,16 @@ class FileService
      * @param mixed $logoDir
      * @return FileService
      */
-    public function setLogoDir($logoDir)
+    public function setLogoDir(string $logoDir): FileService
     {
         $this->logoDir = $logoDir;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLogoUrlPath()
+    public function getLogoUrlPath(): string
     {
         return $this->logoUrlPath;
     }
@@ -60,7 +62,7 @@ class FileService
      * @param mixed $logoUrlPath
      * @return FileService
      */
-    public function setLogoUrlPath($logoUrlPath)
+    public function setLogoUrlPath(string $logoUrlPath): FileService
     {
         $this->logoUrlPath = $logoUrlPath;
         return $this;
@@ -72,7 +74,7 @@ class FileService
      * @param bool $copy
      * @throws Exception
      */
-    public function addLogoToStation(File $file, Station $station, $copy=false)
+    public function addLogoToStation(File $file, Station $station, bool $copy=false)
     {
         $logoName = uniqid() . '.' . $file->getExtension();
         if ($copy) {

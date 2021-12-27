@@ -1,4 +1,6 @@
 <?php
+/** @noinspection PhpRouteMissingInspection */
+/** @noinspection MissingService */
 
 namespace App\Controller;
 
@@ -7,6 +9,7 @@ use App\Service\System;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,11 +28,6 @@ class SystemController extends AbstractController
     private ParameterBagInterface $parameterBag;
 
     /**
-     * @var string|null
-     */
-    private ?string $resultMessage = null;
-
-    /**
      * SystemController constructor.
      * @param System $system
      * @param ParameterBagInterface $parameterBag
@@ -45,7 +43,7 @@ class SystemController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         return $this->render(
             'system/index.html.twig',
@@ -63,7 +61,7 @@ class SystemController extends AbstractController
     /**
      * @Route("/system/reset/mpd", name="system_reset_mpd")
      */
-    public function resetMpd()
+    public function resetMpd(): RedirectResponse
     {
         try {
             $result = $this->system->call('sudo /etc/init.d/mpd start');

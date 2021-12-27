@@ -4,4 +4,6 @@
 namespace App\Exception;
 
 
-class MpcException extends \Exception { }
+use Exception;
+
+class MpcException extends Exception { }

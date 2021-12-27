@@ -1,4 +1,6 @@
 <?php
+/** @noinspection PhpRouteMissingInspection */
+/** @noinspection MissingService */
 
 namespace App\Controller;
 
@@ -66,7 +68,7 @@ class StationController extends AbstractController
      * @throws SystemCallException
      * @throws Exception
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         /// Init
         $parameter = [
@@ -94,9 +96,8 @@ class StationController extends AbstractController
                 $this->fileService->addLogoToStation($uploadedFile, $station);
             }
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($station);
-            $entityManager->flush();
+            $this->entityManager->persist($station);
+            $this->entityManager->flush();
         }
 
         /// StationList
@@ -121,7 +122,7 @@ class StationController extends AbstractController
      * @param int $id
      * @return Response
      */
-    public function play(int $id)
+    public function play(int $id): Response
     {
         $repository = $this->entityManager->getRepository(Station::class);
         $station = $repository->find($id);
@@ -145,7 +146,7 @@ class StationController extends AbstractController
      * @throws MpcException
      * @throws SystemCallException
      */
-    public function playerStop()
+    public function playerStop(): RedirectResponse
     {
         $this->mpc->stop();
 
@@ -157,7 +158,7 @@ class StationController extends AbstractController
      * @param $id
      * @return RedirectResponse
      */
-    public function delete($id)
+    public function delete($id): RedirectResponse
     {
         $repository = $this->entityManager->getRepository(Station::class);
         $station = $repository->find($id);

@@ -4,10 +4,10 @@
 namespace App\Exception;
 
 
-use Throwable;
+use Exception;
 
 
-class SystemCallException extends \Exception {
+class SystemCallException extends Exception {
 
     /**
      * @var array

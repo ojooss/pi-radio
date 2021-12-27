@@ -1,4 +1,6 @@
 <?php
+/** @noinspection PhpRouteMissingInspection */
+/** @noinspection MissingService */
 
 namespace App\Controller;
 

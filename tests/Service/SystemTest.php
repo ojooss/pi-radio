@@ -39,7 +39,7 @@ class SystemTest extends KernelTestCase
         $result = $service->validateOutput(['some console output'], 'console');
         $this->assertTrue($result);
 
-        $result = $service->validateOutput(['some console output'], 'not present',);
+        $result = $service->validateOutput(['some console output'], 'not present');
         $this->assertFalse($result);
 
         try {

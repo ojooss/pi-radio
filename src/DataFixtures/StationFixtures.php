@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection HttpUrlsUsage */
 
 
 namespace App\DataFixtures;
@@ -8,6 +8,7 @@ use App\Entity\Station;
 use App\Service\FileService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class StationFixtures extends Fixture
@@ -29,7 +30,7 @@ class StationFixtures extends Fixture
 
     /**
      * @param ObjectManager $manager
-     * @throws \Exception
+     * @throws Exception
      */
     public function load(ObjectManager $manager)
     {

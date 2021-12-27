@@ -126,9 +126,9 @@ class MPC
      */
     public function setVolume(int $value): self
     {
-        $result = $this->system->call('mpc volume ' . (int)$value);
+        $result = $this->system->call('mpc volume ' . $value);
         if ( empty($result)) {
-            throw new MpcException('empty result from: mpc volume ' . (int)$value);
+            throw new MpcException('empty result from: mpc volume ' . $value);
         }
 
         $systemValue = null;
@@ -141,7 +141,7 @@ class MPC
             throw new MpcException('can not extract volume');
         }
 
-        if ((int)$value != (int)$systemValue) {
+        if ($value != (int)$systemValue) {
             throw new MpcException('could not set volume');
         }
 
