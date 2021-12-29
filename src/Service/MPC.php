@@ -177,6 +177,31 @@ class MPC
 
     /**
      * @return string
+     * @throws MpcException
+     * @throws SystemCallException
+     */
+    public function startMpd(): string
+    {
+        $result = $this->system->call('sudo /etc/init.d/mpd start');
+
+        // daemon needs sometime
+        $timer = 10;
+        while ($timer-- > 0) {
+            sleep(1);
+            if ($this->isMpdRunning()) {
+                break;
+            }
+        }
+
+        if ( empty($result)) {
+            throw new MpcException('empty result from: service mpd start');
+        }
+
+        return implode(PHP_EOL, $result);
+    }
+
+    /**
+     * @return string
      * @throws SystemCallException
      */
     public function getError(): string

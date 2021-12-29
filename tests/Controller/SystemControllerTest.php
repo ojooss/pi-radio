@@ -16,4 +16,8 @@ class SystemControllerTest extends WebTestCase
         self::assertResponseStatusCodeSame(200);
     }
 
+    # /system/reset/mpd
+
+
+
 }

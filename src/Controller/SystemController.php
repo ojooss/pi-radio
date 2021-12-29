@@ -4,7 +4,9 @@
 
 namespace App\Controller;
 
+use App\Exception\MpcException;
 use App\Exception\SystemCallException;
+use App\Service\MPC;
 use App\Service\System;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,16 +28,18 @@ class SystemController extends AbstractController
      * @var ParameterBagInterface
      */
     private ParameterBagInterface $parameterBag;
+    private MPC $mpc;
 
     /**
      * SystemController constructor.
      * @param System $system
      * @param ParameterBagInterface $parameterBag
      */
-    public function __construct(System $system, ParameterBagInterface $parameterBag)
+    public function __construct(System $system, ParameterBagInterface $parameterBag, MPC $MPC)
     {
         $this->system = $system;
         $this->parameterBag = $parameterBag;
+        $this->mpc = $MPC;
     }
 
     /**
@@ -60,17 +64,20 @@ class SystemController extends AbstractController
 
     /**
      * @Route("/system/reset/mpd", name="system_reset_mpd")
+     * @return RedirectResponse
      */
     public function resetMpd(): RedirectResponse
     {
         try {
-            $result = $this->system->call('sudo /etc/init.d/mpd start');
-            $message = implode(PHP_EOL, $result);
+            $message = $this->mpc->startMpd();
+            return $this->redirectToRoute('system_status', ['s' => $message]);
         } catch (SystemCallException $e) {
             $message =
                 $e->getMessage() . PHP_EOL .
                 PHP_EOL .
                 implode(PHP_EOL, $e->getOutput());
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
         }
         return $this->redirectToRoute('system_status', ['e' => $message]);
     }
