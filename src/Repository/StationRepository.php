@@ -50,32 +50,11 @@ class StationRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Pipe[] Returns an array of Pipe objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Station[]
+     */
+    public function getAllSorted(): array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findBy([], ['sequenceNr' => 'ASC', 'name' => 'ASC']);
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Pipe
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

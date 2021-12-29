@@ -8,6 +8,7 @@ use App\Entity\Station;
 use App\Exception\MpcException;
 use App\Exception\SystemCallException;
 use App\Form\Type\StationFormType;
+use App\Repository\StationRepository;
 use App\Service\FileService;
 use App\Service\MPC;
 use Doctrine\ORM\EntityManagerInterface;
@@ -102,7 +103,7 @@ class StationController extends AbstractController
 
         /// StationList
         $repository = $this->entityManager->getRepository(Station::class);
-        $parameter['stations'] = $repository->findBy([], ['sequenceNr' => 'ASC', 'name' => 'ASC']);
+        $parameter['stations'] = $repository->getAllSorted();
 
         /// MpcError
         $mpcError = $this->mpc->getError();
