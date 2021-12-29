@@ -40,7 +40,6 @@ then
   # apache is necessary for ImageUploadTest
   service apache2 start
   echo "*** Running tests ***"
-  sudo -u www-data composer fixtures
   sudo -u www-data composer test
   # make sure to exit with test result
   exit $?

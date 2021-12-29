@@ -22,6 +22,8 @@ class StationControllerTest extends WebTestCase
     }
 
     /**
+     * @group needs-container
+     *
      * @throws MpcException
      * @throws SystemCallException
      */
@@ -49,6 +51,7 @@ class StationControllerTest extends WebTestCase
     }
 
     /**
+     * @group needs-container
      * @depends testPlay
      *
      * @return void
