@@ -141,6 +141,38 @@ class StationController extends AbstractController
     }
 
     /**
+     * @Route("/station/next", name="station_next")
+     * @return Response
+     */
+    public function next(): Response
+    {
+        /** @var StationRepository $repository */
+        $repository = $this->entityManager->getRepository(Station::class);
+        $current = $repository->getCurrent();
+        $stations = $repository->getAllSorted();
+        reset($stations);
+
+        $use = false;
+        $stationToBePlayed = current($stations); // use first one by default
+        foreach($stations as $station) {
+            if ($current->getId() == $station->getId()) {
+                $use = true;
+            } elseif ($use) {
+                $stationToBePlayed = $station;
+                break;
+            }
+        }
+
+        try {
+            $this->mpc->play($stationToBePlayed);
+        } catch (Throwable $e) {
+            return $this->redirectToRoute('index', ['e' => $e->getMessage()]);
+        }
+
+        return $this->redirectToRoute('index');
+    }
+
+    /**
      * @Route("/station/stop", name="station_stop")
      *
      * @return RedirectResponse
