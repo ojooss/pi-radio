@@ -15,9 +15,4 @@ class SystemControllerTest extends WebTestCase
         $client->request(Request::METHOD_GET, 'system');
         self::assertResponseStatusCodeSame(200);
     }
-
-    # /system/reset/mpd
-
-
-
 }

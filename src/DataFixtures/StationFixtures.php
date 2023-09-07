@@ -15,24 +15,17 @@ class StationFixtures extends Fixture
 {
 
     /**
-     * @var FileService
-     */
-    private FileService $fileService;
-
-    /**
      * StationFixtures constructor.
-     * @param FileService $fileService
      */
-    public function __construct(FileService $fileService)
+    public function __construct(private readonly FileService $fileService)
     {
-        $this->fileService = $fileService;
     }
 
     /**
      * @param ObjectManager $manager
      * @throws Exception
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
 
         $station = new Station();

@@ -18,14 +18,14 @@ class MpcTest extends KernelTestCase
     /**
      * @var ObjectManager|null
      */
-    private ObjectManager $entityManager;
+    private ?ObjectManager $entityManager;
 
     final function setUp(): void
     {
         parent::setUp();
 
         static::bootKernel();
-        
+
         $this->entityManager = parent::$kernel
             ->getContainer()
             ->get('doctrine')

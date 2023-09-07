@@ -24,7 +24,6 @@ class FileService
 
     /**
      * FileService constructor.
-     * @param ParameterBagInterface $parameterBag
      */
     public function __construct(ParameterBagInterface $parameterBag)
     {
@@ -69,12 +68,9 @@ class FileService
     }
 
     /**
-     * @param File $file
-     * @param Station $station
-     * @param bool $copy
      * @throws Exception
      */
-    public function addLogoToStation(File $file, Station $station, bool $copy=false)
+    public function addLogoToStation(File $file, Station $station, bool $copy=false): void
     {
         $logoName = uniqid() . '.' . $file->getExtension();
         if ($copy) {
@@ -90,10 +86,9 @@ class FileService
     }
 
     /**
-     * @param Station $station
      * @throws Exception
      */
-    public function removeLogoFromStation(Station $station)
+    public function removeLogoFromStation(Station $station): void
     {
         if (file_exists($this->logoDir . '/' . $station->getLogoName())) {
             if (false === unlink($this->logoDir . '/' . $station->getLogoName())) {

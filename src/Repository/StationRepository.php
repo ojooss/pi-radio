@@ -16,19 +16,13 @@ use Doctrine\Persistence\ManagerRegistry;
 class StationRepository extends ServiceEntityRepository
 {
     /**
-     * @var MPC
-     */
-    private MPC $MPC;
-
-    /**
      * StationRepository constructor.
      * @param ManagerRegistry $registry
      * @param MPC $MPC
      */
-    public function __construct(ManagerRegistry $registry, MPC $MPC)
+    public function __construct(ManagerRegistry $registry, private readonly MPC $MPC)
     {
         parent::__construct($registry, Station::class);
-        $this->MPC = $MPC;
     }
 
     /**

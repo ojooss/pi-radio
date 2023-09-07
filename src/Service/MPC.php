@@ -14,21 +14,13 @@ class MPC
     /**
      * @var string
      */
-    private string $playlistFile;
-
-    /**
-     * @var System
-     */
-    private System $system;
+    private readonly string $playlistFile;
 
     /**
      * MPC constructor.
-     * @param KernelInterface $kernel
-     * @param System $system
      */
-    public function __construct(KernelInterface $kernel, System $system)
+    public function __construct(KernelInterface $kernel, private readonly System $system)
     {
-        $this->system = $system;
         $this->playlistFile =
             $kernel->getProjectDir() . DIRECTORY_SEPARATOR .
             'var' . DIRECTORY_SEPARATOR .
@@ -36,7 +28,6 @@ class MPC
     }
 
     /**
-     * @param Station $station
      * @throws MpcException
      * @throws SystemCallException
      * @throws Throwable
@@ -112,14 +103,13 @@ class MPC
         if ( empty($result)) {
             throw new MpcException('empty result from: mpc volume');
         }
-        if (!preg_match_all('~volume:[\s]*([0-9]+)%~i', $result[0], $matches)) {
+        if (!preg_match_all('~volume:\s*([0-9]+)%~i', (string) $result[0], $matches)) {
             throw new MpcException('can not extract volume');
         }
         return (int)$matches[1][0];
     }
 
     /**
-     * @param int $value
      * @return $this
      * @throws MpcException
      * @throws SystemCallException
@@ -133,7 +123,7 @@ class MPC
 
         $systemValue = null;
         foreach($result as $line) {
-            if (preg_match('~volume:[\s]*([0-9]+)%~', $line, $matches)) {
+            if (preg_match('~volume:\s*([0-9]+)%~', (string) $line, $matches)) {
                 $systemValue = $matches[1];
             }
         }
@@ -218,7 +208,7 @@ class MPC
     /**
      * @return false|string
      */
-    public function getPlaylistFileContent()
+    public function getPlaylistFileContent(): bool|string
     {
         return file_get_contents($this->playlistFile);
     }

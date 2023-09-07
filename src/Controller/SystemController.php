@@ -4,7 +4,6 @@
 
 namespace App\Controller;
 
-use App\Exception\MpcException;
 use App\Exception\SystemCallException;
 use App\Service\MPC;
 use App\Service\System;
@@ -20,26 +19,10 @@ class SystemController extends AbstractController
 {
 
     /**
-     * @var System
-     */
-    private System $system;
-
-    /**
-     * @var ParameterBagInterface
-     */
-    private ParameterBagInterface $parameterBag;
-    private MPC $mpc;
-
-    /**
      * SystemController constructor.
-     * @param System $system
-     * @param ParameterBagInterface $parameterBag
      */
-    public function __construct(System $system, ParameterBagInterface $parameterBag, MPC $MPC)
+    public function __construct(private readonly System $system, private readonly ParameterBagInterface $parameterBag, private readonly MPC $mpc)
     {
-        $this->system = $system;
-        $this->parameterBag = $parameterBag;
-        $this->mpc = $MPC;
     }
 
     /**
@@ -76,7 +59,7 @@ class SystemController extends AbstractController
                 $e->getMessage() . PHP_EOL .
                 PHP_EOL .
                 implode(PHP_EOL, $e->getOutput());
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $message = $e->getMessage();
         }
         return $this->redirectToRoute('system_status', ['e' => $message]);
@@ -94,10 +77,10 @@ class SystemController extends AbstractController
 
             // highlight some pattern
             foreach ($result as $i => $line) {
-                if (preg_match('~error|failed|fehl~i', $line)) {
+                if (preg_match('~error|failed|fehl~i', (string) $line)) {
                     $line = '<strong class="text-danger">'.$line.'</strong>';
                 }
-                $line = preg_replace('~(.*)(\Wis\W)(.*)~i', '$1<strong class="text-success">$2</strong>$3', $line);
+                $line = preg_replace('~(.*)(\Wis\W)(.*)~i', '$1<strong class="text-success">$2</strong>$3', (string) $line);
                 $result[$i] = $line;
             }
 

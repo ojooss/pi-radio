@@ -21,37 +21,20 @@ class IndexController extends AbstractController
 {
 
     /**
-     * @var Mpc
-     */
-    private Mpc $mpc;
-
-    /**
-     * @var EntityManagerInterface
-     */
-    private EntityManagerInterface $entityManager;
-    /**
-     * @var ParameterBagInterface
-     */
-    private ParameterBagInterface $parameterBag;
-
-    /**
      * IndexController constructor.
      * @param Mpc $mpc
      * @param EntityManagerInterface $entityManager
      * @param ParameterBagInterface $parameterBag
      */
-    public function __construct(MPC $mpc, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag)
+    public function __construct(private readonly Mpc $mpc, private readonly EntityManagerInterface $entityManager, private readonly ParameterBagInterface $parameterBag)
     {
-        $this->mpc = $mpc;
-        $this->entityManager = $entityManager;
-        $this->parameterBag = $parameterBag;
     }
 
     /**
      * @Route("/", name="index")
      * @return RedirectResponse|Response
      */
-    public function index()
+    public function index(): RedirectResponse|Response
     {
         /** @var StationRepository $repository */
         $repository = $this->entityManager->getRepository(Station::class);
@@ -84,7 +67,7 @@ class IndexController extends AbstractController
      * @throws MpcException
      * @throws SystemCallException
      */
-    public function volumeMute()
+    public function volumeMute(): RedirectResponse|Response
     {
         $this->mpc->setVolume(0);
 
@@ -98,7 +81,7 @@ class IndexController extends AbstractController
      * @throws MpcException
      * @throws SystemCallException
      */
-    public function volumeDown()
+    public function volumeDown(): RedirectResponse|Response
     {
         $volume = $this->mpc->getVolume();
         $volume -=5;
@@ -117,7 +100,7 @@ class IndexController extends AbstractController
      * @throws MpcException
      * @throws SystemCallException
      */
-    public function volumeUp()
+    public function volumeUp(): RedirectResponse|Response
     {
         $volume = $this->mpc->getVolume();
         $volume +=5;
@@ -136,7 +119,7 @@ class IndexController extends AbstractController
      * @throws MpcException
      * @throws SystemCallException
      */
-    public function volumeFull()
+    public function volumeFull(): RedirectResponse|Response
     {
         $this->mpc->setVolume(100);
 
@@ -147,11 +130,12 @@ class IndexController extends AbstractController
     /**
      * @Route("/volume/{value<\d+>}", name="volume_set")
      *
+     * @param $value
      * @return RedirectResponse|Response
      * @throws MpcException
      * @throws SystemCallException
      */
-    public function volumeSet($value)
+    public function volumeSet($value): RedirectResponse|Response
     {
         if ($value >= 0 && $value <= 100) {
             $this->mpc->setVolume((int)$value);

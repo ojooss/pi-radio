@@ -28,37 +28,10 @@ class StationController extends AbstractController
 {
 
     /**
-     * @var EntityManagerInterface
-     */
-    private EntityManagerInterface $entityManager;
-
-    /**
-     * @var MPC
-     */
-    private MPC $mpc;
-    /**
-     * @var FileService
-     */
-    private FileService $fileService;
-    /**
-     * @var ParameterBagInterface
-     */
-    private ParameterBagInterface $parameterBag;
-
-    /**
      * StationController constructor.
-     *
-     * @param EntityManagerInterface $entityManager
-     * @param MPC $mpc
-     * @param FileService $fileService
-     * @param ParameterBagInterface $parameterBag
      */
-    public function __construct(EntityManagerInterface $entityManager, MPC $mpc, FileService $fileService, ParameterBagInterface $parameterBag)
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly MPC $mpc, private readonly FileService $fileService, private readonly ParameterBagInterface $parameterBag)
     {
-        $this->entityManager = $entityManager;
-        $this->mpc = $mpc;
-        $this->fileService = $fileService;
-        $this->parameterBag = $parameterBag;
     }
 
     /**
@@ -108,6 +81,7 @@ class StationController extends AbstractController
         /// MpcError
         $mpcError = $this->mpc->getError();
         if ($mpcError) {
+
             $parameter['errorMessage'] = $mpcError;
         }
 

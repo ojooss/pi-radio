@@ -15,7 +15,7 @@ trait PHPUnitUtils
      * @return mixed
      * @throws ReflectionException
      */
-    public static function callPrivateMethod($object, $name, array $args = [])
+    public static function callPrivateMethod($object, $name, array $args = []): mixed
     {
         $class = new ReflectionClass($object);
         $method = $class->getMethod($name);

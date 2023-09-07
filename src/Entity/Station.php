@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnused */
 /** @noinspection PhpUnusedPrivateFieldInspection */
 /** @noinspection PhpUnusedPrivateMethodInspection */
 
@@ -21,7 +21,7 @@ class Station
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=128)
@@ -40,7 +40,7 @@ class Station
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private ?int $sequenceNr;
+    private ?int $sequenceNr = null;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -67,7 +67,6 @@ class Station
     }
 
     /**
-     * @param int $id
      * @return $this
      */
     private function setId(int $id): self
@@ -94,7 +93,6 @@ class Station
     }
 
     /**
-     * @param string $name
      * @return $this
      */
     public function setName(string $name): self
@@ -113,7 +111,6 @@ class Station
     }
 
     /**
-     * @param string $url
      * @return $this
      */
     public function setUrl(string $url): self

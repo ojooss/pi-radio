@@ -10,19 +10,13 @@ use Exception;
 class SystemCallException extends Exception {
 
     /**
-     * @var array
-     */
-    private array $output;
-
-    /**
      * SystemCallException constructor.
      * @param string $message
      * @param array $output
      * @param int $code
      */
-    public function __construct($message = "", $output = [], $code = 0)
+    public function __construct(string $message = "", private readonly array $output = [], $code = 0)
     {
-        $this->output = $output;
         parent::__construct($message, $code);
     }
 

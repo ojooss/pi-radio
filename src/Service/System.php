@@ -5,7 +5,6 @@ namespace App\Service;
 
 
 use App\Exception\SystemCallException;
-use Throwable;
 
 
 class System
@@ -15,7 +14,6 @@ class System
      * @param string $command
      * @return array
      * @throws SystemCallException
-     * @noinspection PhpUnhandledExceptionInspection
      */
     public function call(string $command): array
     {
@@ -33,7 +31,6 @@ class System
      * @param string $validationRegex
      * @param string|null $exceptionClass
      * @param string|null $exceptionMessage
-     * @throws Throwable
      * @return bool
      */
     public function validateOutput(array $stdOut, string $validationRegex, string $exceptionClass = null, string $exceptionMessage = null): bool

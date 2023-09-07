@@ -7,6 +7,7 @@ use App\Exception\MpcException;
 use App\Exception\SystemCallException;
 use App\Repository\StationRepository;
 use App\Service\MPC;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -26,6 +27,7 @@ class StationControllerTest extends WebTestCase
      *
      * @throws MpcException
      * @throws SystemCallException
+     * @throws Exception
      */
     public function testPlay()
     {
@@ -55,6 +57,7 @@ class StationControllerTest extends WebTestCase
      * @depends testPlay
      *
      * @return void
+     * @throws Exception
      */
     public function testNext()
     {
