@@ -1,4 +1,6 @@
-FROM php:8.2-apache
+# basic image
+###################################
+FROM php:8.1-apache as base
 
 
 # COMPOSER
@@ -41,11 +43,20 @@ COPY docker/mpd.conf /etc/mpd.conf
 COPY docker/sudoers.conf /etc/sudoers.d/piradio
 
 
-# add and init application
+# interim image: add and init application
+###################################
+FROM base as app
 COPY . /var/www/html
 RUN bash /var/www/html/docker/entrypoint.sh
 RUN chown -R www-data:www-data /var/www/html
 
+
+# main image
+###################################
+FROM base
+
+# add and init application
+COPY --from=app /var/www/html /var/www/html
 
 # Start image
 COPY docker/entrypoint.sh /usr/local/bin/piradio-entrypoint.sh
