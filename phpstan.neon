@@ -1,0 +1,5 @@
+parameters:
+	level: 0
+	paths:
+		- /var/www/html/src
+		- /var/www/html/tests
