@@ -71,11 +71,19 @@ class MPC
     /**
      * @return string
      * @throws SystemCallException
+     * @throws MpcException
      */
     public function getState(): string
     {
         # mpc current
-        $result = $this->system->call('mpc current');
+        try {
+            $result = $this->system->call('mpc current');
+        } catch (SystemCallException) {
+            // re-restart
+            $this->startMpd();
+            // try again
+            $result = $this->system->call('mpc current');
+        }
         if (count($result)) {
             return $result[0];
         } else {
@@ -85,6 +93,7 @@ class MPC
 
     /**
      * @return bool
+     * @throws MpcException
      * @throws SystemCallException
      */
     public function isPlaying(): bool
