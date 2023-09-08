@@ -25,6 +25,9 @@ else
     echo "MPD is running"
 fi
 
+# set default volume
+mpc volume 50 || true
+
 # prepare database
 sudo -u www-data mkdir -p ${PROJECT_PATH}var/database
 echo "run composer migrate"
