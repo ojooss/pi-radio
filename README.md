@@ -3,7 +3,7 @@ Webradio for Raspberry PI
 
 Start application with
 
-    docker-compose up
+    docker-compose -f docker-compose.prod.yml up
 
 
 
