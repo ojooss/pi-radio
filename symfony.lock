@@ -18,9 +18,6 @@
     "doctrine/collections": {
         "version": "1.6.8"
     },
-    "doctrine/common": {
-        "version": "3.2.0"
-    },
     "doctrine/data-fixtures": {
         "version": "1.5.1"
     },
@@ -145,6 +142,20 @@
         },
         "files": [
             "phpstan.dist.neon"
+        ]
+    },
+    "phpunit/phpunit": {
+        "version": "10.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "9.6",
+            "ref": "7364a21d87e658eb363c5020c072ecfdc12e2326"
+        },
+        "files": [
+            ".env.test",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
         ]
     },
     "psr/cache": {
