@@ -25,6 +25,7 @@ class StationFixtures extends Fixture
      * @param ObjectManager $manager
      * @throws Exception
      */
+    #[\Override]
     public function load(ObjectManager $manager): void
     {
 

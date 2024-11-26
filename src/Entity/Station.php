@@ -10,48 +10,36 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\StationRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\StationRepository::class)]
 class Station
 {
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string", length=128)
-     *
      * @Assert\NotBlank
      */
+    #[ORM\Column(type: 'string', length: 128)]
     private string $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
      * @Assert\NotBlank
      */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $url;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $sequenceNr = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $logoName;
 
-    /**
-     * @ORM\Column(type="datetime")
-     *
-     */
-    private DateTimeInterface $updatedAt;
+    
+    #[ORM\Column(type: 'datetime')]
+    private readonly DateTimeInterface $updatedAt;
 
     /**
      * @var ?File

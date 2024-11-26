@@ -33,7 +33,7 @@ class System
      * @param string|null $exceptionMessage
      * @return bool
      */
-    public function validateOutput(array $stdOut, string $validationRegex, string $exceptionClass = null, string $exceptionMessage = null): bool
+    public function validateOutput(array $stdOut, string $validationRegex, ?string $exceptionClass = null, ?string $exceptionMessage = null): bool
     {
         if (empty(
             array_filter($stdOut, function ($element) use ($validationRegex) {

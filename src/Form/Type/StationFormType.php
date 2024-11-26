@@ -27,6 +27,7 @@ class StationFormType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array $options
      */
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -40,6 +41,7 @@ class StationFormType extends AbstractType
     /**
      * @param OptionsResolver $resolver
      */
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

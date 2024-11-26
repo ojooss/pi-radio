@@ -48,7 +48,7 @@ class MPC
         $result = $this->system->call('mpc load mpc-playlist');
         $this->system->validateOutput($result, 'loading.*mpc-playlist', MpcException::class, 'mpc load mpc-playlist failed');
         $result = $this->system->call('mpc playlist');
-        $this->system->validateOutput($result, preg_quote($station->getUrl()), MpcException::class, 'Can not reload mpc-playlist');
+        $this->system->validateOutput($result, preg_quote((string) $station->getUrl()), MpcException::class, 'Can not reload mpc-playlist');
 
         # play first item (we have only one)
         $result = $this->system->call('mpc play 1');

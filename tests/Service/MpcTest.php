@@ -22,8 +22,6 @@ class MpcTest extends KernelTestCase
 
     final function setUp(): void
     {
-        parent::setUp();
-
         static::bootKernel();
 
         $this->entityManager = parent::$kernel
@@ -32,6 +30,7 @@ class MpcTest extends KernelTestCase
             ->getManager();
     }
 
+    #[\Override]
     final function tearDown(): void
     {
         parent::tearDown();
