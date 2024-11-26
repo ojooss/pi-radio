@@ -23,6 +23,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_84,
         SymfonySetList::SYMFONY_64,
+        SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
         DoctrineSetList::DOCTRINE_BUNDLE_210,
         DoctrineSetList::DOCTRINE_ORM_213,
         DoctrineSetList::DOCTRINE_ORM_214,

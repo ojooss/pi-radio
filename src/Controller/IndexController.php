@@ -31,9 +31,9 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/", name="index")
      * @return RedirectResponse|Response
      */
+    #[Route(path: '/', name: 'index')]
     public function index(): RedirectResponse|Response
     {
         /** @var StationRepository $repository */
@@ -61,12 +61,12 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/volume/mute", name="volume_mute")
      *
      * @return RedirectResponse|Response
      * @throws MpcException
      * @throws SystemCallException
      */
+    #[Route(path: '/volume/mute', name: 'volume_mute')]
     public function volumeMute(): RedirectResponse|Response
     {
         $this->mpc->setVolume(0);
@@ -75,12 +75,12 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/volume/down", name="volume_down")
      *
      * @return RedirectResponse|Response
      * @throws MpcException
      * @throws SystemCallException
      */
+    #[Route(path: '/volume/down', name: 'volume_down')]
     public function volumeDown(): RedirectResponse|Response
     {
         $volume = $this->mpc->getVolume();
@@ -94,12 +94,12 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/volume/up", name="volume_up")
      *
      * @return RedirectResponse|Response
      * @throws MpcException
      * @throws SystemCallException
      */
+    #[Route(path: '/volume/up', name: 'volume_up')]
     public function volumeUp(): RedirectResponse|Response
     {
         $volume = $this->mpc->getVolume();
@@ -113,12 +113,12 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/volume/full", name="volume_full")
      *
      * @return RedirectResponse|Response
      * @throws MpcException
      * @throws SystemCallException
      */
+    #[Route(path: '/volume/full', name: 'volume_full')]
     public function volumeFull(): RedirectResponse|Response
     {
         $this->mpc->setVolume(100);
@@ -128,13 +128,13 @@ class IndexController extends AbstractController
 
 
     /**
-     * @Route("/volume/{value<\d+>}", name="volume_set")
      *
      * @param $value
      * @return RedirectResponse|Response
      * @throws MpcException
      * @throws SystemCallException
      */
+    #[Route(path: '/volume/{value<\d+>}', name: 'volume_set')]
     public function volumeSet($value): RedirectResponse|Response
     {
         if ($value >= 0 && $value <= 100) {

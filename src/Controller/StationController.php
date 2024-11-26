@@ -35,13 +35,13 @@ class StationController extends AbstractController
     }
 
     /**
-     * @Route("/stations", name="stations")
      *
      * @param Request $request
      * @return Response
      * @throws SystemCallException
      * @throws Exception
      */
+    #[Route(path: '/stations', name: 'stations')]
     public function index(Request $request): Response
     {
         /// Init
@@ -93,10 +93,10 @@ class StationController extends AbstractController
     }
 
     /**
-     * @Route("/station/{id}/play", name="station_play")
      * @param int $id
      * @return Response
      */
+    #[Route(path: '/station/{id}/play', name: 'station_play')]
     public function play(int $id): Response
     {
         $repository = $this->entityManager->getRepository(Station::class);
@@ -115,9 +115,9 @@ class StationController extends AbstractController
     }
 
     /**
-     * @Route("/station/next", name="station_next")
      * @return Response
      */
+    #[Route(path: '/station/next', name: 'station_next')]
     public function next(): Response
     {
         /** @var StationRepository $repository */
@@ -147,12 +147,12 @@ class StationController extends AbstractController
     }
 
     /**
-     * @Route("/station/stop", name="station_stop")
      *
      * @return RedirectResponse
      * @throws MpcException
      * @throws SystemCallException
      */
+    #[Route(path: '/station/stop', name: 'station_stop')]
     public function playerStop(): RedirectResponse
     {
         $this->mpc->stop();
@@ -161,10 +161,10 @@ class StationController extends AbstractController
     }
 
     /**
-     * @Route("/station/{id}/delete", name="station_delete")
      * @param $id
      * @return RedirectResponse
      */
+    #[Route(path: '/station/{id}/delete', name: 'station_delete')]
     public function delete($id): RedirectResponse
     {
         $repository = $this->entityManager->getRepository(Station::class);

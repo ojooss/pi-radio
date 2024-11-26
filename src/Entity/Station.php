@@ -19,16 +19,12 @@ class Station
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    /**
-     * @Assert\NotBlank
-     */
     #[ORM\Column(type: 'string', length: 128)]
+    #[Assert\NotBlank]
     private string $name;
 
-    /**
-     * @Assert\NotBlank
-     */
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private string $url;
 
     #[ORM\Column(type: 'integer', nullable: true)]

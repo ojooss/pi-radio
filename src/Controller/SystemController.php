@@ -26,10 +26,10 @@ class SystemController extends AbstractController
     }
 
     /**
-     * @Route("/system", name="system_status")
      * @param Request $request
      * @return Response
      */
+    #[Route(path: '/system', name: 'system_status')]
     public function index(Request $request): Response
     {
         return $this->render(
@@ -46,9 +46,9 @@ class SystemController extends AbstractController
     }
 
     /**
-     * @Route("/system/reset/mpd", name="system_reset_mpd")
      * @return RedirectResponse
      */
+    #[Route(path: '/system/reset/mpd', name: 'system_reset_mpd')]
     public function resetMpd(): RedirectResponse
     {
         try {
