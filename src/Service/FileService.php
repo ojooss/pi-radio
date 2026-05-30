@@ -27,8 +27,12 @@ class FileService
      */
     public function __construct(ParameterBagInterface $parameterBag)
     {
-        $this->logoDir  = $parameterBag->get('logo_location');
-        $this->logoUrlPath = $parameterBag->get('logo_url_path');
+        $logoDir = $parameterBag->get('logo_location');
+        $logoUrlPath = $parameterBag->get('logo_url_path');
+        assert(is_string($logoDir));
+        assert(is_string($logoUrlPath));
+        $this->logoDir = $logoDir;
+        $this->logoUrlPath = $logoUrlPath;
     }
 
     /**
@@ -40,7 +44,7 @@ class FileService
     }
 
     /**
-     * @param mixed $logoDir
+     * @param string $logoDir
      * @return FileService
      */
     public function setLogoDir(string $logoDir): FileService
@@ -58,7 +62,7 @@ class FileService
     }
 
     /**
-     * @param mixed $logoUrlPath
+     * @param string $logoUrlPath
      * @return FileService
      */
     public function setLogoUrlPath(string $logoUrlPath): FileService

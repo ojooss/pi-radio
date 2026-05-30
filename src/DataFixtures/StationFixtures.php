@@ -4,6 +4,7 @@
 namespace App\DataFixtures;
 
 
+use Override;
 use App\Entity\Station;
 use App\Service\FileService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -25,7 +26,7 @@ class StationFixtures extends Fixture
      * @param ObjectManager $manager
      * @throws Exception
      */
-    #[\Override]
+    #[Override]
     public function load(ObjectManager $manager): void
     {
 

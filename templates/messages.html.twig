@@ -1,7 +1,7 @@
 <div class="container">
-{% if app.request.get('e') %}
+{% if app.request.query.get('e') %}
     <div class="alert alert-danger" role="alert">
-        <pre>{{ app.request.get('e') }}</pre>
+        <pre>{{ app.request.query.get('e') }}</pre>
     </div>
 {% endif %}
 {% if errorMessage is defined %}
@@ -9,9 +9,9 @@
         <pre>{{ errorMessage }}</pre>
     </div>
 {% endif %}
-{% if app.request.get('s') %}
+{% if app.request.query.get('s') %}
     <div class="alert alert-info" role="alert">
-        <pre>{{ app.request.get('s') }}</pre>
+        <pre>{{ app.request.query.get('s') }}</pre>
     </div>
 {% endif %}
 {% if successMessage is defined %}

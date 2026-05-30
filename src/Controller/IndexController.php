@@ -15,18 +15,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
 
-    /**
-     * IndexController constructor.
-     * @param Mpc $mpc
-     * @param EntityManagerInterface $entityManager
-     * @param ParameterBagInterface $parameterBag
-     */
-    public function __construct(private readonly Mpc $mpc, private readonly EntityManagerInterface $entityManager, private readonly ParameterBagInterface $parameterBag)
+    public function __construct(private readonly MPC $mpc, private readonly EntityManagerInterface $entityManager, private readonly ParameterBagInterface $parameterBag)
     {
     }
 
@@ -129,13 +123,13 @@ class IndexController extends AbstractController
 
     /**
      *
-     * @param $value
+     * @param string $value
      * @return RedirectResponse|Response
      * @throws MpcException
      * @throws SystemCallException
      */
     #[Route(path: '/volume/{value<\d+>}', name: 'volume_set')]
-    public function volumeSet($value): RedirectResponse|Response
+    public function volumeSet(string $value): RedirectResponse|Response
     {
         if ($value >= 0 && $value <= 100) {
             $this->mpc->setVolume((int)$value);

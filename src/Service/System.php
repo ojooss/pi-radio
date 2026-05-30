@@ -12,7 +12,7 @@ class System
 
     /**
      * @param string $command
-     * @return array
+     * @return array<string>
      * @throws SystemCallException
      */
     public function call(string $command): array
@@ -27,7 +27,7 @@ class System
     }
 
     /**
-     * @param array $stdOut
+     * @param array<string> $stdOut
      * @param string $validationRegex
      * @param string|null $exceptionClass
      * @param string|null $exceptionMessage
@@ -37,10 +37,10 @@ class System
     {
         if (empty(
             array_filter($stdOut, function ($element) use ($validationRegex) {
-                return preg_match('~'.$validationRegex.'~', $element);
+                return (bool) preg_match('~'.$validationRegex.'~', $element);
             })
         )) {
-            if (null !== $exceptionClass && class_exists($exceptionClass)) {
+            if (null !== $exceptionClass && is_a($exceptionClass, \Throwable::class, true)) {
                 throw new $exceptionClass($exceptionMessage);
             }
             else {

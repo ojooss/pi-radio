@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Throwable;
 
 
@@ -64,7 +64,7 @@ class StationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $station = $form->getData();
 
-            /** @var UploadedFile $uploadedFile */
+            /** @var UploadedFile|null $uploadedFile */
             $uploadedFile = $form->get('logo')->getData();
             if ($uploadedFile) {
                 $this->fileService->addLogoToStation($uploadedFile, $station);
@@ -75,6 +75,7 @@ class StationController extends AbstractController
         }
 
         /// StationList
+        /** @var StationRepository $repository */
         $repository = $this->entityManager->getRepository(Station::class);
         $parameter['stations'] = $repository->getAllSorted();
 
@@ -127,7 +128,7 @@ class StationController extends AbstractController
         reset($stations);
 
         $use = false;
-        $stationToBePlayed = current($stations); // use first one by default
+        $stationToBePlayed = current($stations) ?: null;
         foreach($stations as $station) {
             if ($current->getId() == $station->getId()) {
                 $use = true;
@@ -135,6 +136,10 @@ class StationController extends AbstractController
                 $stationToBePlayed = $station;
                 break;
             }
+        }
+
+        if (!$stationToBePlayed instanceof Station) {
+            return $this->redirectToRoute('index');
         }
 
         try {
@@ -161,11 +166,11 @@ class StationController extends AbstractController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return RedirectResponse
      */
     #[Route(path: '/station/{id}/delete', name: 'station_delete')]
-    public function delete($id): RedirectResponse
+    public function delete(int $id): RedirectResponse
     {
         $repository = $this->entityManager->getRepository(Station::class);
         $station = $repository->find($id);

@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class SystemController extends AbstractController
 {
@@ -32,12 +32,15 @@ class SystemController extends AbstractController
     #[Route(path: '/system', name: 'system_status')]
     public function index(Request $request): Response
     {
+        $playlistLocation = $this->parameterBag->get('playlist_location');
+        assert(is_string($playlistLocation));
+
         return $this->render(
             'system/index.html.twig',
             [
-                'resultMessage' => $request->get('msg', false),
+                'resultMessage' => $request->query->get('msg', false),
                 'current_time' => $this->callSystemCommand("TZ='Europe/Berlin' date"),
-                'playlist_file' => $this->callSystemCommand('cat ' . $this->parameterBag->get('playlist_location')),
+                'playlist_file' => $this->callSystemCommand('cat ' . $playlistLocation),
                 'mpc_playlist' => $this->callSystemCommand('mpc playlist'),
                 'mpd_status' => $this->callSystemCommand('service mpd status'),
                 'mpc_status' => $this->callSystemCommand('mpc'),

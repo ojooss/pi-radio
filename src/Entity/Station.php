@@ -4,19 +4,20 @@
 
 namespace App\Entity;
 
+use App\Repository\StationRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: \App\Repository\StationRepository::class)]
+#[ORM\Entity(repositoryClass: StationRepository::class)]
 class Station
 {
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    /** @phpstan-ignore property.unusedType */
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 128)]
@@ -38,26 +39,11 @@ class Station
     private readonly DateTimeInterface $updatedAt;
 
     /**
-     * @var ?File
-     */
-    private ?File $tmpFile = null;
-
-    /**
      * Station constructor.
      */
     public function __construct()
     {
         $this->updatedAt = new DateTime();
-    }
-
-    /**
-     * @return $this
-     */
-    private function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**

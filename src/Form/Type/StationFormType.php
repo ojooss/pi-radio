@@ -4,6 +4,7 @@
 namespace App\Form\Type;
 
 
+use Override;
 use App\Entity\Station;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -25,9 +26,9 @@ class StationFormType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array<string, mixed> $options
      */
-    #[\Override]
+    #[Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -41,7 +42,7 @@ class StationFormType extends AbstractType
     /**
      * @param OptionsResolver $resolver
      */
-    #[\Override]
+    #[Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
