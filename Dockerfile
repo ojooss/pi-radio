@@ -1,6 +1,6 @@
 # basic image
 ###################################
-FROM php:8.4-apache as base
+FROM php:8.5-apache as base
 
 
 # COMPOSER
@@ -20,7 +20,7 @@ RUN apt-get update && \
 # PHP modules
 # see: https://github.com/mlocati/docker-php-extension-installer
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions pdo pdo_mysql mysqli intl xdebug-3.4.0beta1
+RUN install-php-extensions pdo pdo_mysql mysqli intl xdebug
 
 
 # apache configuration
