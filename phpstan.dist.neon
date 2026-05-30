@@ -1,8 +1,14 @@
 parameters:
-    level: 6
+    level: 7
     paths:
         - bin/
         - config/
         - public/
         - src/
         - tests/
+    excludePaths:
+        - config/reference.php
+    ignoreErrors:
+        -
+            identifier: method.notFound
+            path: tests/Service/MpcTest.php
