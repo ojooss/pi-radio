@@ -4,8 +4,75 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68c8178a7b8fdd5bfa6b148fad9e995c",
+    "content-hash": "9025582ad11bbc4a2e4c238d7e2fa31c",
     "packages": [
+        {
+            "name": "bretrzaun/statuspage",
+            "version": "4.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bretrzaun/statuspage.git",
+                "reference": "2b3fd34fd7d86b52253685f54cd6d6f8d0dd4df6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bretrzaun/statuspage/zipball/2b3fd34fd7d86b52253685f54cd6d6f8d0dd4df6",
+                "reference": "2b3fd34fd7d86b52253685f54cd6d6f8d0dd4df6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.3",
+                "psr/http-client": "^1.0",
+                "psr/log": "^2.0 || ^3.0",
+                "symfony/stopwatch": "^6.4||^7.4 || ^8.0",
+                "twig/twig": "^3.0"
+            },
+            "require-dev": {
+                "dg/bypass-finals": "^1.4",
+                "doctrine/dbal": "^4.0",
+                "doctrine/migrations": "^3.3",
+                "elasticsearch/elasticsearch": "^8.0 || ^9.0",
+                "mongodb/mongodb": "^1.11 || ^2.0",
+                "monolog/monolog": "^3.0",
+                "nyholm/psr7": "^1.5",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^12.0 || ^13.0",
+                "rector/rector": "^2.0",
+                "symfony/browser-kit": "^6.4 || ^7.4 || ^8.0",
+                "symfony/css-selector": "^6.4 || ^7.4 || ^8.0",
+                "symfony/dom-crawler": "^6.4 || ^7.4 || ^8.0",
+                "symfony/event-dispatcher": "^6.4||^7.4 || ^8.0",
+                "symfony/http-client": "^6.4||^7.4 || ^8.0"
+            },
+            "suggest": {
+                "doctrine/dbal": "for checking DB connections",
+                "doctrine/migrations": "for checking Doctrine Migration status",
+                "elasticsearch/elasticsearch": "for checking Elasticsearch",
+                "mongodb/mongodb": "for checking MongoDB connections"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BretRZaun\\StatusPage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bret R. Zaun",
+                    "email": "bretrzaun@hotmail.com"
+                }
+            ],
+            "description": "Adds a status page to an app",
+            "support": {
+                "issues": "https://github.com/bretrzaun/statuspage/issues",
+                "source": "https://github.com/bretrzaun/statuspage/tree/4.4.0"
+            },
+            "time": "2026-05-06T10:22:56+00:00"
+        },
         {
             "name": "doctrine/collections",
             "version": "2.6.0",
@@ -1374,6 +1441,111 @@
                 "source": "https://github.com/php-fig/event-dispatcher/tree/1.0.0"
             },
             "time": "2019-01-08T18:20:26+00:00"
+        },
+        {
+            "name": "psr/http-client",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-client.git",
+                "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-client/zipball/bb5906edc1c324c9a05aa0873d40117941e5fa90",
+                "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0 || ^8.0",
+                "psr/http-message": "^1.0 || ^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP clients",
+            "homepage": "https://github.com/php-fig/http-client",
+            "keywords": [
+                "http",
+                "http-client",
+                "psr",
+                "psr-18"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/http-client"
+            },
+            "time": "2023-09-23T14:17:50+00:00"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/http-message/tree/2.0"
+            },
+            "time": "2023-04-04T09:54:51+00:00"
         },
         {
             "name": "psr/link",
