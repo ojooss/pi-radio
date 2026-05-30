@@ -2,6 +2,7 @@
 
 namespace App\Tests\Service;
 
+use Override;
 use App\Entity\Station;
 use App\Service\FileService;
 use App\Tests\PHPUnitUtils;
@@ -27,11 +28,14 @@ class FileServiceTest extends KernelTestCase {
     /**
      * @throws Exception
      */
+    #[Override]
     final function setUp(): void
     {
         static::bootKernel();
 
-        $this->fileService = self::getContainer()->get(FileService::class);
+        $fileService = self::getContainer()->get(FileService::class);
+        assert($fileService instanceof FileService);
+        $this->fileService = $fileService;
 
         if (!file_exists(__DIR__.'/../../var/test')) {
             if (false === mkdir(__DIR__ . '/../../var/test', 0775, true)) {
@@ -49,11 +53,10 @@ class FileServiceTest extends KernelTestCase {
     /**
      * @throws ReflectionException
      */
-    public function testAddLogoToStation()
+    public function testAddLogoToStation(): void
     {
         $file = new File($this->filePath);
         $station = new Station();
-        $this->callPrivateMethod($station, 'setId', [42]);
         $this->callPrivateMethod($this->fileService, 'addLogoToStation', [$file, $station]);
 
         $expected = $this->fileService->getLogoDir() . '/' . $station->getLogoName();
@@ -64,11 +67,10 @@ class FileServiceTest extends KernelTestCase {
     /**
      * @throws ReflectionException
      */
-    public function testRemoveLogoFromStation()
+    public function testRemoveLogoFromStation(): void
     {
         $file = new File($this->filePath);
         $station = new Station();
-        $this->callPrivateMethod($station, 'setId', [42]);
         $this->callPrivateMethod($this->fileService, 'addLogoToStation', [$file, $station]);
 
         $expected = $this->fileService->getLogoDir() . '/' . $station->getLogoName();

@@ -2,6 +2,8 @@
 
 namespace App\Tests\Service;
 
+use Mockery\MockInterface;
+use Override;
 use App\Entity\Station;
 use App\Exception\MpcException;
 use App\Exception\SystemCallException;
@@ -20,6 +22,7 @@ class MpcTest extends KernelTestCase
      */
     private ?ObjectManager $entityManager;
 
+    #[Override]
     final function setUp(): void
     {
         static::bootKernel();
@@ -30,7 +33,7 @@ class MpcTest extends KernelTestCase
             ->getManager();
     }
 
-    #[\Override]
+    #[Override]
     final function tearDown(): void
     {
         parent::tearDown();
@@ -55,6 +58,7 @@ class MpcTest extends KernelTestCase
         /*
          * Success case
          */
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         /*
          * 'mpc clear'
@@ -83,6 +87,7 @@ class MpcTest extends KernelTestCase
         /*
          * Error case 1: mpc load mpc-playlist failed
          */
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock->shouldReceive('call')
             ->times(2);
@@ -102,6 +107,7 @@ class MpcTest extends KernelTestCase
         /*
          * Error case 2: Can not reload mpc-playlist
          */
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock->shouldReceive('call')
             ->times(3);
@@ -125,6 +131,7 @@ class MpcTest extends KernelTestCase
         /*
          * Error case 3: Can not start player
          */
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock->shouldReceive('call');
         $systemServiceMock
@@ -153,6 +160,7 @@ class MpcTest extends KernelTestCase
     final function testStop(): void
     {
         /// success case
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -163,6 +171,7 @@ class MpcTest extends KernelTestCase
         Mockery::close();
 
         /// fail case
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -186,6 +195,7 @@ class MpcTest extends KernelTestCase
      */
     final function testGetCurrent(): void
     {
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -196,6 +206,7 @@ class MpcTest extends KernelTestCase
         Mockery::close();
         $this->assertNotEmpty($result);
 
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -212,6 +223,7 @@ class MpcTest extends KernelTestCase
      */
     final function testIsPlaying(): void
     {
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -221,6 +233,7 @@ class MpcTest extends KernelTestCase
         $this->assertTrue($mpc->isPlaying());
         Mockery::close();
 
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -237,6 +250,7 @@ class MpcTest extends KernelTestCase
      */
     final function testGetVolume(): void
     {
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -246,6 +260,7 @@ class MpcTest extends KernelTestCase
         $this->assertEquals(42, $mpc->getVolume());
         Mockery::close();
 
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -267,6 +282,7 @@ class MpcTest extends KernelTestCase
      */
     final function testSetVolume(): void
     {
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -325,6 +341,7 @@ class MpcTest extends KernelTestCase
     final function testIsMpdRunning(): void
     {
         # check mpc service
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -334,6 +351,7 @@ class MpcTest extends KernelTestCase
         $this->assertTrue( $mpc->isMpdRunning() );
         Mockery::close();
 
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')
@@ -350,6 +368,7 @@ class MpcTest extends KernelTestCase
      */
     final function testGetError(): void
     {
+        /** @var System&MockInterface $systemServiceMock */
         $systemServiceMock = Mockery::mock(System::class);
         $systemServiceMock
             ->shouldReceive('call')

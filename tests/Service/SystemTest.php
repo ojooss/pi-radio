@@ -19,7 +19,7 @@ class SystemTest extends KernelTestCase
     {
         $service = new System();
         $result = $service->call('ls -l ' . __DIR__);
-        $this->assertIsArray($result);
+        $this->assertNotEmpty($result);
 
         try {
             $service->call('/bin/no/valid/command 2>&1');

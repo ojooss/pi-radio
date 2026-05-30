@@ -9,17 +9,13 @@ trait PHPUnitUtils
 {
 
     /**
-     * @param $object
-     * @param $name
-     * @param array $args
-     * @return mixed
+     * @param array<mixed> $args
      * @throws ReflectionException
      */
-    public static function callPrivateMethod($object, $name, array $args = []): mixed
+    public static function callPrivateMethod(object $object, string $name, array $args = []): mixed
     {
         $class = new ReflectionClass($object);
         $method = $class->getMethod($name);
-        $method->setAccessible(true);
         return $method->invokeArgs($object, $args);
     }
 
