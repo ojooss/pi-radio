@@ -10,7 +10,8 @@ cd ${PROJECT_PATH}
 git config --global --add safe.directory ${PROJECT_PATH}
 
 # Dev: bind mount overrides image; install all dependencies including dev
-if [ "$APP_ENV" = "dev" ]; then
+# Test: image was built with --no-dev, so dev bundles (WebProfilerBundle etc.) are missing
+if [ "$APP_ENV" = "dev" ] || [ "$1" = "test" ]; then
     echo "run composer install"
     composer install
 fi
