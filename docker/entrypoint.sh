@@ -4,16 +4,31 @@ set -e
 
 echo ""
 echo "########## INITIALIZING APPLICATION ##########"
-PROJECT_PATH=/var/www/html/
+PROJECT_PATH=/var/www/html
+cd ${PROJECT_PATH}
 
-# install dependencies
-if [ ! -f ${PROJECT_PATH}composer.done -o ${PROJECT_PATH}composer.lock -nt ${PROJECT_PATH}composer.done ]; then
-##composer install --no-dev
-  echo "run composer install"
-  sudo -u www-data composer install
-  sudo -u www-data touch ${PROJECT_PATH}composer.done
+git config --global --add safe.directory ${PROJECT_PATH}
+
+# Dev: bind mount overrides image; install all dependencies including dev
+if [ "$APP_ENV" = "dev" ]; then
+    echo "run composer install"
+    composer install
+fi
+
+# prepare database directory
+mkdir -p ${PROJECT_PATH}/var/database
+
+echo "run composer migrate"
+composer migrate
+
+# fix permissions on writable paths (after migrate so SQLite file is included)
+if [ "$APP_ENV" = "dev" ]; then
+    chown -R 1000:www-data ${PROJECT_PATH}
+    chmod -R ug+w ${PROJECT_PATH}/var
+    chmod -R g+w ${PROJECT_PATH}/public/logos
 else
-  echo "composer is up to date"
+    chown -R www-data:www-data ${PROJECT_PATH}/var
+    chown -R www-data:www-data ${PROJECT_PATH}/public/logos
 fi
 
 # start media player daemon
@@ -27,11 +42,6 @@ fi
 
 # set default volume
 mpc volume 50 || true
-
-# prepare database
-sudo -u www-data mkdir -p ${PROJECT_PATH}var/database
-echo "run composer migrate"
-sudo -u www-data composer migrate
 
 echo ""
 echo "########### INITIALIZING FINISHED ###########"

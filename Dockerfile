@@ -1,6 +1,4 @@
-# basic image
-###################################
-FROM php:8.5-apache as base
+FROM php:8.5-apache
 
 
 # COMPOSER
@@ -36,25 +34,18 @@ COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 # Advanced Linux Sound Architecture (alsa-utils)
 RUN apt-get update && \
     apt-get install -y mpd mpc alsa-utils && \
-    apt-get clean
+    apt-get clean && \
+    mkdir -p /var/lib/mpd /var/run/mpd && \
+    chown -R mpd:audio /var/lib/mpd /var/run/mpd
 COPY docker/mpd.conf /etc/mpd.conf
 COPY docker/sudoers.conf /etc/sudoers.d/piradio
 
 
-# interim image: add and init application
-###################################
-FROM base as app
+# Application
 COPY . /var/www/html
-RUN bash /var/www/html/docker/entrypoint.sh
-RUN chown -R www-data:www-data /var/www/html
+RUN APP_ENV=prod composer install --no-dev --optimize-autoloader \
+    && chown -R www-data:www-data /var/www/html
 
-
-# main image
-###################################
-FROM base
-
-# add and init application
-COPY --from=app /var/www/html /var/www/html
 
 # Start image
 COPY docker/entrypoint.sh /usr/local/bin/piradio-entrypoint.sh
