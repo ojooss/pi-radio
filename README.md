@@ -1,9 +1,13 @@
 # pi-radio
 Webradio for Raspberry PI
 
+Build docker image with
+
+    docker buildx build --platform linux/amd64,linux/arm/v7 --tag ojooss/piradio:latest --push -f docker/Dockerfile .
+
 Start application with
 
-    docker-compose -f docker-compose.prod.yml up
+    docker compose -f docker-compose.prod.yml up
 
 
 

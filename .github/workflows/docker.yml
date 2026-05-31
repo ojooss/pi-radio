@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: build docker image
-      run: docker build  --force-rm --no-cache --pull  --tag piradio:test .
+      run: docker build  --force-rm --no-cache --pull --tag piradio:test -f docker/Dockerfile .
 
     - name: test image
       run: docker run --rm piradio:test test

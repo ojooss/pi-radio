@@ -2,9 +2,7 @@ services:
 
   webserver:
     container_name: piradio
-    build:
-      context: .
-    image: piradio:latest
+    image: ojooss/piradio:latest
     restart: always
     environment:
       - APP_ENV=prod

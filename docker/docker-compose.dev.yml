@@ -2,14 +2,12 @@ services:
 
   webserver:
     container_name: piradio
-    build:
-      context: .
-    image: piradio:latest
+    image: ojooss/piradio:latest
     ports:
       - "${HTTP_PORT}:80"
     volumes:
       # mount application dir
-      - "./:/var/www/html:cached"
+      - "../:/var/www/html:cached"
       # var directory should stay in container
       - "/var/www/html/var"
     environment:
