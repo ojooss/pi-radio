@@ -147,31 +147,14 @@ class MPC
         return $this;
     }
 
-    /**
-     * checks music-player-daemon (MPD) status
-     *
-     * @return bool
-     * @throws MpcException
-     * @throws SystemCallException
-     */
     public function isMpdRunning(): bool
     {
-        $result = $this->system->call('service mpd status');
-        if ( empty($result)) {
-            throw new MpcException('empty result from: service mpd status');
+        try {
+            $result = $this->system->call('service mpd status');
+        } catch (SystemCallException) {
+            return false;
         }
-/*
-        $lines = array_filter($result, function ($element) {
-            return preg_match('/Active:/', $element);
-        });
-
-        if (!preg_match_all('~(active|inactive)~', current($lines), $matches)) {
-            throw new MpcException('can not extract daemon status');
-        }
-
-        return ($matches[1][0] === 'active');
-*/
-        return ($result[0] === 'mpd is running.');
+        return !empty($result) && $result[0] === 'mpd is running.';
     }
 
     /**
